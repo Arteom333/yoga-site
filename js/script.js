@@ -1,4 +1,4 @@
-window.addEventListener('DOMContentLoaded', function() {
+window.addEventListener('DOMContentLoaded', function () {
     'use strict';
 
     let tab = document.querySelectorAll('.info-header-tab'),
@@ -18,10 +18,10 @@ window.addEventListener('DOMContentLoaded', function() {
         if (tabContent[b].classList.contains('hide')) {
             tabContent[b].classList.remove('hide');
             tabContent[b].classList.add('show');
-        } 
+        }
     }
 
-    info.addEventListener('click', function(event) {
+    info.addEventListener('click', function (event) {
         let target = event.target;
         if (target && target.classList.contains('info-header-tab')) {
             for (let i = 0; i < tab.length; i++) {
@@ -29,8 +29,168 @@ window.addEventListener('DOMContentLoaded', function() {
                     hideTabContent(0);
                     showTabContent(i);
                     break;
-                } 
+                }
             }
         }
     });
+
+    //////////////////////////  Timer  //////////////////////////////
+
+    let deadline = '2020-03-21';
+
+    function getTimeRemaining(endtime) {
+        let time = Date.parse(endtime) - Date.parse(new Date()),
+            seconds = Math.floor((time / 1000) % 60),
+            minutes = Math.floor((time / 1000 / 60) % 60),
+            hours = Math.floor((time / (1000 * 60 * 60)));
+
+        return {
+            'total': time,
+            'hours': hours,
+            'minutes': minutes,
+            'seconds': seconds
+        };
+    }
+
+    function setClock(id, endtime) {
+        let timer = document.getElementById(id),
+            hours = timer.querySelector('.hours'),
+            minutes = timer.querySelector('.minutes'),
+            seconds = timer.querySelector('.seconds'),
+            timeInterval = setInterval(updateClock, 1000);
+
+        function updateClock() {
+            let t = getTimeRemaining(endtime);
+
+            function addZero(num) {
+                if (num <= 9) {
+                    return '0' + num;
+                } else {
+                    return num;
+                }
+            }
+
+            hours.textContent = addZero(t.hours);
+            minutes.textContent = addZero(t.minutes);
+            seconds.textContent = addZero(t.seconds);
+
+
+            if (t.total <= 0) {
+                clearInterval(timeInterval);
+                hours.textContent = '00';
+                minutes.textContent = '00';
+                seconds.textContent = '00';
+            }
+        }
+
+
+    }
+
+    setClock('timer', deadline);
+    //можно так создавать несколько таймероv
+
+    ////////////////////   MODAL   ////////////////////////
+
+    let more = document.querySelector('.more'),
+        overlay = document.querySelector('.overlay'),
+        close = document.querySelector('.popup-close'),
+        descr = document.querySelectorAll('.description-btn');
+
+    more.addEventListener('click', function() {
+        overlay.style.display = 'block';
+        this.classList.add('more-splash');
+        document.body.style.overflow = 'hidden';//запретить прокрутку страницы
+    });
+
+    close.addEventListener('click', function() {
+        overlay.style.display = 'none';
+        more.classList.remove('more-splash');
+        document.body.style.overflow = '';
+    });
+
+    descr.forEach(function(item) {
+        item.addEventListener('click', function() {
+            overlay.style.display = 'block';
+            this.classList.add('more-splash');
+            document.body.style.overflow = 'hidden';//запретить прокрутку страницы
+        });
+    });
+
+    //let age = document.getElementById('age');
+    //function showUser(surname, name) {
+	//    alert("Пользователь " + surname + " " + name + ", его возраст " + this.value);
+    //}
+    //showUser.apply(age, ['Порческу', 'Артём']);
+
+    class Options {
+        constructor(height, width, bg, fontSize, textAlign) {
+            this.height = height;
+            this.width = width;
+            this.bg = bg;
+            this.fontSize = fontSize;
+            this.textAlign = textAlign;
+        }
+        createDiv() {
+            let elem = document.createElement('div');
+            document.body.appendChild(elem);
+            let params = `height:${this.height}px; width:${this.width}px; background-color:${this.bg}; font-size:${this.fontSize}px; text-align:${this.textAlign}`;
+            elem.style.cssText = params;
+        }
+    }
+
+    const divNew = new Options(325, 335, 'red', 15, 'center');
+    divNew.createDiv();
 });
+
+// function Animal(type, legs) {  
+//     this.type = type;
+//     this.legs = legs;  
+//     this.logInfo = function() {
+//       console.log(this === myCat); // => true
+//       console.log('The ' + this.type + ' has ' + this.legs + ' legs');
+//     };
+//   }
+//   var myCat = new Animal('Cat', 4);  
+//   // logs "The Cat has 4 legs"
+//   setTimeout(myCat.logInfo.bind(myCat), 1000);
+// function makeArray() {
+//     var items = [];
+
+//     for (let i = 0; i < 10; i++) {
+//         var item = function() {
+//             console.log(i);
+//         };
+
+//     items.push(item);
+//     }
+//     return items;
+// }
+
+
+
+/* function makeArray() {
+    var items = [];
+
+    for (let i = 0; i < 10; i++) {
+        var item = function() {
+            console.log(i);
+        };
+
+    items.push(item);
+    }
+    return items;
+}
+
+var arr = makeArray();
+
+arr[1]();
+arr[3]();
+arr[7]();*/
+
+/* 
+let name = 'Tim',
+        ageOf = 17,
+        mail = 'porchiesku@bk.ru';
+        
+    document.write(`Пользователю ${name} ${ageOf} лет и его почтовый адрес ${mail}`);
+*/
