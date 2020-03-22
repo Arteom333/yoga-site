@@ -87,7 +87,7 @@ window.addEventListener('DOMContentLoaded', function () {
     }
 
     setClock('timer', deadline);
-    //можно так создавать несколько таймероv
+    //to create some timers
 
     ////////////////////   MODAL   ////////////////////////
 
@@ -116,12 +116,6 @@ window.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    //let age = document.getElementById('age');
-    //function showUser(surname, name) {
-	//    alert("Пользователь " + surname + " " + name + ", его возраст " + this.value);
-    //}
-    //showUser.apply(age, ['Порческу', 'Артём']);
-
     class Options {
         constructor(height, width, bg, fontSize, textAlign) {
             this.height = height;
@@ -141,56 +135,3 @@ window.addEventListener('DOMContentLoaded', function () {
     const divNew = new Options(325, 335, 'red', 15, 'center');
     divNew.createDiv();
 });
-
-// function Animal(type, legs) {  
-//     this.type = type;
-//     this.legs = legs;  
-//     this.logInfo = function() {
-//       console.log(this === myCat); // => true
-//       console.log('The ' + this.type + ' has ' + this.legs + ' legs');
-//     };
-//   }
-//   var myCat = new Animal('Cat', 4);  
-//   // logs "The Cat has 4 legs"
-//   setTimeout(myCat.logInfo.bind(myCat), 1000);
-// function makeArray() {
-//     var items = [];
-
-//     for (let i = 0; i < 10; i++) {
-//         var item = function() {
-//             console.log(i);
-//         };
-
-//     items.push(item);
-//     }
-//     return items;
-// }
-
-
-
-/* function makeArray() {
-    var items = [];
-
-    for (let i = 0; i < 10; i++) {
-        var item = function() {
-            console.log(i);
-        };
-
-    items.push(item);
-    }
-    return items;
-}
-
-var arr = makeArray();
-
-arr[1]();
-arr[3]();
-arr[7]();*/
-
-/* 
-let name = 'Tim',
-        ageOf = 17,
-        mail = 'porchiesku@bk.ru';
-        
-    document.write(`Пользователю ${name} ${ageOf} лет и его почтовый адрес ${mail}`);
-*/
